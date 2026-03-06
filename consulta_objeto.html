@@ -9,6 +9,8 @@
         * {
             box-sizing: border-box;
             -webkit-tap-highlight-color: transparent;
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -18,9 +20,10 @@
             font-family: 'Roboto', Arial, sans-serif;
             display: flex;
             flex-direction: column;
-            align-items: center;
-            min-height: 100vh;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
 
         /* Overlay e Sidebar */
@@ -56,7 +59,7 @@
 
         /* Cabeçalho da Sidebar */
         .sidebar-header {
-            padding: 25px 15px;
+            padding: 20px 15px;
             font-size: 11px;
             color: #757575;
             font-weight: 700;
@@ -68,7 +71,7 @@
         }
 
         .menu-list {
-            padding: 10px 0;
+            padding: 8px 0;
             overflow-y: auto;
             flex-grow: 1;
         }
@@ -76,23 +79,28 @@
         .menu-item {
             display: flex;
             align-items: center;
-            padding: 12px 15px;
+            padding: 10px 15px;
             text-decoration: none;
             color: #333;
-            font-size: 15px;
+            font-size: 14px;
             font-weight: 500;
         }
 
         /* Círculos e Ícones específicos */
         .icon-circle {
-            width: 42px;
-            height: 42px;
+            width: 36px;
+            height: 36px;
             border-radius: 50%;
-            margin-right: 15px;
+            margin-right: 12px;
             display: flex;
             align-items: center;
             justify-content: center;
             flex-shrink: 0;
+        }
+
+        .icon-circle svg {
+            width: 18px;
+            height: 18px;
         }
 
         .bg-blue {
@@ -110,36 +118,40 @@
         /* --- Cabeçalho Superior --- */
         .header {
             width: 100%;
-            padding: 15px 20px;
+            padding: 12px 16px;
             border-bottom: 1px solid #e0e0e0;
             display: flex;
             align-items: center;
             background: #fff;
+            flex-shrink: 0;
         }
 
         .menu-btn {
             cursor: pointer;
             display: flex;
             flex-direction: column;
-            gap: 5px;
-            width: 35px;
+            gap: 4px;
+            width: 30px;
         }
 
         .menu-btn div {
-            width: 25px;
-            height: 3px;
+            width: 22px;
+            height: 2.5px;
             background: #333;
         }
 
         .header-title {
             flex-grow: 1;
             text-align: center;
-            font-size: 17px;
+            font-size: 14px;
             font-weight: 700;
             color: #000;
             text-transform: uppercase;
             line-height: 1.2;
-            padding-right: 35px;
+            padding-right: 30px;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
         }
 
         /* --- Conteúdo Principal --- */
@@ -148,36 +160,38 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            padding-top: 40px;
+            padding: 15px 16px 0;
+            flex: 1;
+            overflow-y: auto;
         }
 
         .page-title {
-            font-size: 22px;
+            font-size: 20px;
             font-weight: 700;
-            margin: 0 0 40px 0;
+            margin: 0 0 25px 0;
             color: #212121;
             text-align: center;
         }
 
         /* Grid de Botões (Scan, Texto, Leitor) */
         .button-grid {
-            width: 92%;
+            width: 100%;
             display: grid;
             grid-template-columns: 1fr 1fr 1fr;
             gap: 8px;
+            margin-bottom: 25px;
         }
 
         .btn-action {
-            height: 65px;
+            height: 60px;
             background-color: #5cb85c;
-            /* Verde padrão do botão 'Entrar' */
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             color: white;
             display: flex;
             align-items: center;
             justify-content: center;
-            gap: 10px;
+            gap: 6px;
             cursor: pointer;
             text-decoration: none;
             box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
@@ -188,46 +202,117 @@
         }
 
         .btn-action span {
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
         }
 
         .icon-svg {
-            width: 22px;
-            height: 22px;
+            width: 20px;
+            height: 20px;
             fill: white;
         }
 
         /* Divisor */
         .divider {
-            width: 92%;
+            width: 100%;
             height: 1px;
             background-color: #eee;
-            margin-top: 40px;
+            margin: 15px 0;
         }
 
         /* --- Rodapé --- */
         .footer {
-            margin-top: auto;
             width: 100%;
-            padding: 40px 0;
             text-align: center;
+            padding: 15px 0;
             border-top: 1px solid #f0f0f0;
         }
 
         .footer p {
-            font-size: 13px;
+            font-size: 12px;
             color: #666;
-            margin: 4px 0;
+            margin: 3px 0;
         }
 
         .footer .demo-tag {
             text-transform: uppercase;
             font-weight: 700;
             color: #555;
-            margin-bottom: 12px;
-            font-size: 14px;
-            letter-spacing: 1px;
+            margin-bottom: 8px;
+            font-size: 13px;
+            letter-spacing: 0.5px;
+        }
+
+        /* Ajuste para telas muito pequenas */
+        @media (max-height: 700px) {
+            .page-title {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            
+            .button-grid {
+                margin-bottom: 15px;
+            }
+            
+            .btn-action {
+                height: 55px;
+            }
+            
+            .btn-action span {
+                font-size: 14px;
+            }
+            
+            .icon-svg {
+                width: 18px;
+                height: 18px;
+            }
+            
+            .footer {
+                padding: 12px 0;
+            }
+        }
+
+        /* Galaxy A35 específico (aproximadamente 412x700) */
+        @media (max-width: 420px) and (max-height: 720px) {
+            .header-title {
+                font-size: 12px;
+            }
+            
+            .page-title {
+                font-size: 18px;
+                margin-bottom: 15px;
+            }
+            
+            .btn-action {
+                height: 52px;
+                gap: 4px;
+            }
+            
+            .btn-action span {
+                font-size: 13px;
+            }
+            
+            .icon-svg {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .divider {
+                margin: 12px 0;
+            }
+            
+            .footer {
+                padding: 10px 0;
+            }
+            
+            .footer p {
+                font-size: 11px;
+            }
+            
+            .footer .demo-tag {
+                font-size: 12px;
+                margin-bottom: 5px;
+            }
         }
     </style>
 </head>
@@ -252,8 +337,7 @@
             <a href="consulta_objeto.html" class="menu-item">
                 <div class="icon-circle bg-dark">
                     <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
-                        <path
-                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
                     </svg>
                 </div>
                 Consultar Objeto
@@ -261,44 +345,57 @@
             <a href="consulta_container.html" class="menu-item">
                 <div class="icon-circle bg-dark">
                     <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
-                        <path
-                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                        <path d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
                     </svg>
                 </div>
                 Consultar Conteúdo Container
             </a>
 
             <a href="solicitacoes.html" class="menu-item">
-                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                <div class="icon-circle bg-dark">
+                    <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-                    </svg></div>Solicitações
+                    </svg>
+                </div>
+                Solicitações
             </a>
             <a href="#" class="menu-item">
-                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                <div class="icon-circle bg-dark">
+                    <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-                    </svg></div>Arquivar em Container
+                    </svg>
+                </div>
+                Arquivar em Container
             </a>
             <a href="#" class="menu-item">
-                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                <div class="icon-circle bg-dark">
+                    <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-                    </svg></div>Atribuir Localização
+                    </svg>
+                </div>
+                Atribuir Localização
             </a>
             <a href="#" class="menu-item">
-                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                <div class="icon-circle bg-dark">
+                    <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-                    </svg></div>Status Gestão Documental
+                    </svg>
+                </div>
+                Status Gestão Documental
             </a>
             <a href="sobre.html" class="menu-item">
-                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                <div class="icon-circle bg-dark">
+                    <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
                         <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
-                    </svg></div>Sobre
+                    </svg>
+                </div>
+                Sobre
             </a>
 
             <a href="index.html" class="menu-item">
                 <div class="icon-circle bg-red">
                     <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
-                        <path
-                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                        <path d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
                     </svg>
                 </div>
                 Sair
@@ -323,16 +420,14 @@
         <div class="button-grid">
             <button class="btn-action">
                 <svg class="icon-svg" viewBox="0 0 24 24">
-                    <path
-                        d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5 5 5 0 0 0 5 5 5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z" />
+                    <path d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5 5 5 0 0 0 5 5 5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z" />
                 </svg>
                 <span>Scan</span>
             </button>
 
             <button class="btn-action">
                 <svg class="icon-svg" viewBox="0 0 24 24">
-                    <path
-                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                    <path d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
                 </svg>
                 <span>Texto</span>
             </button>
