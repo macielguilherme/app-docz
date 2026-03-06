@@ -1,0 +1,183 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Docz Login</title>
+    <style>
+        * {
+            box-sizing: border-box;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: 'Roboto', Arial, sans-serif;
+            overflow-x: hidden;
+        }
+
+        /* Layout Mobile (iPhone 14 Pro Max proporcional) */
+        .mobile-container {
+            width: 100vw;
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+        }
+
+        /* Popup de Erro conforme imagem */
+        #error-popup {
+            display: none;
+            position: fixed;
+            top: 0;
+            width: 100%;
+            height: 110px;
+            background-color: #b74433;
+            color: white;
+            padding: 20px 30px;
+            z-index: 1000;
+        }
+
+        .form-group {
+            width: 85%;
+            border-bottom: 1.5px solid #e0e0e0;
+            padding: 25px 0 10px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .icon-container {
+            width: 40px;
+            margin-right: 20px;
+            display: flex;
+            justify-content: center;
+        }
+
+        .icon-svg {
+            width: 24px;
+            height: 24px;
+            fill: #616161;
+        }
+
+        input {
+            border: none;
+            outline: none;
+            font-size: 18px;
+            color: #212121;
+            flex-grow: 1;
+            background: transparent;
+        }
+
+        input::placeholder {
+            color: #757575;
+        }
+
+        .btn-entrar {
+            width: 85%;
+            height: 60px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 4px;
+            color: white;
+            font-size: 20px;
+            font-weight: 500;
+            cursor: pointer;
+            margin-top: 40px;
+        }
+
+        .footer {
+            position: absolute;
+            bottom: 30px;
+            width: 100%;
+            text-align: center;
+            border-top: 1px solid #eeeeee;
+            padding-top: 20px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="error-popup">
+        <div style="font-size: 22px; font-weight: bold;">Problema</div>
+        <div id="error-message" style="font-size: 18px; margin-top: 5px;">Cliente Invalido</div>
+    </div>
+
+    <div class="mobile-container">
+        <img src="https://docz.sosdocs.com.br/Docz/app/images/logo.png"
+            style="width: 220px; margin-top: 80px; margin-bottom: 60px;">
+
+        <p style="font-size: 17px; color: #757575; margin-bottom: 30px;">SOSDOCS - Guarda, Gestão e Tecnologia</p>
+
+        <div class="form-group" style="border-top: 1.5px solid #e0e0e0;">
+            <div class="icon-container">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                </svg>
+            </div>
+            <input type="text" id="usuario" placeholder="Usuario">
+        </div>
+
+        <div class="form-group">
+            <div class="icon-container">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                </svg>
+            </div>
+            <input type="password" id="senha" placeholder="........">
+        </div>
+
+        <div class="form-group">
+            <div class="icon-container">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                        d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8V9h8v10zm-2-8h-4v2h4v-2zm0 4h-4v2h4v-2z" />
+                </svg>
+            </div>
+            <input type="text" id="cliente" placeholder="Cliente">
+        </div>
+
+        <div style="width: 85%; padding: 25px 0; display: flex; align-items: center;">
+            <svg style="width: 22px; height: 22px; fill: #bdbdbd; margin-right: 15px;" viewBox="0 0 24 24">
+                <path
+                    d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+            </svg>
+            <span style="font-size: 16px; color: #bdbdbd;">Mostrar Senha</span>
+        </div>
+
+        <button onclick="verificarLogin()" class="btn-entrar">Entrar</button>
+
+        <div class="footer">
+            <p style="font-size: 14px; color: #424242;">(c) Copyright 2025. Todos os Direitos Reservados.</p>
+        </div>
+    </div>
+
+    <script>
+        function verificarLogin() {
+            const u = document.getElementById('usuario').value;
+            const s = document.getElementById('senha').value;
+            const c = document.getElementById('cliente').value;
+            const pop = document.getElementById('error-popup');
+            const msg = document.getElementById('error-message');
+
+            pop.style.display = 'none';
+
+            if (c !== 'teste') { mostrar("Cliente Invalido"); }
+            else if (s !== 'teste') { mostrar("Senha Invalida"); }
+            else if (u !== 'teste') { mostrar("Usuario Invalido"); }
+            else { window.location.href = 'painel.html'; }
+        }
+        function mostrar(t) {
+            document.getElementById('error-message').innerText = t;
+            document.getElementById('error-popup').style.display = 'block';
+            setTimeout(() => { document.getElementById('error-popup').style.display = 'none'; }, 3000);
+        }
+    </script>
+</body>
+
+</html>

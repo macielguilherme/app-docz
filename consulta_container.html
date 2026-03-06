@@ -1,0 +1,367 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <title>Docz - Consulta Conteúdo Container</title>
+    <style>
+        * {
+            box-sizing: border-box;
+            -webkit-tap-highlight-color: transparent;
+        }
+
+        body {
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+            font-family: 'Roboto', Arial, sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            min-height: 100vh;
+            overflow-x: hidden;
+        }
+
+        /* Overlay e Sidebar */
+        #overlay {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.4);
+            z-index: 998;
+        }
+
+        #sidebar {
+            position: fixed;
+            top: 0;
+            left: -100%;
+            width: 85%;
+            max-width: 320px;
+            height: 100%;
+            background: #fff;
+            z-index: 999;
+            transition: 0.3s;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 2px 0 10px rgba(0, 0, 0, 0.2);
+        }
+
+        #sidebar.active {
+            left: 0;
+        }
+
+        /* Cabeçalho da Sidebar */
+        .sidebar-header {
+            padding: 25px 15px;
+            font-size: 11px;
+            color: #757575;
+            font-weight: 700;
+            text-transform: uppercase;
+            border-bottom: 1px solid #eee;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .menu-list {
+            padding: 10px 0;
+            overflow-y: auto;
+            flex-grow: 1;
+        }
+
+        .menu-item {
+            display: flex;
+            align-items: center;
+            padding: 12px 15px;
+            text-decoration: none;
+            color: #333;
+            font-size: 15px;
+            font-weight: 500;
+        }
+
+        /* Círculos e Ícones específicos */
+        .icon-circle {
+            width: 42px;
+            height: 42px;
+            border-radius: 50%;
+            margin-right: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+        }
+
+        .bg-blue {
+            background-color: #4e85ba;
+        }
+
+        .bg-dark {
+            background-color: #3e5062;
+        }
+
+        .bg-red {
+            background-color: #b74433;
+        }
+
+        /* --- Cabeçalho Superior --- */
+        .header {
+            width: 100%;
+            padding: 15px 20px;
+            border-bottom: 1px solid #e0e0e0;
+            display: flex;
+            align-items: center;
+            background: #fff;
+        }
+
+        .menu-btn {
+            cursor: pointer;
+            display: flex;
+            flex-direction: column;
+            gap: 5px;
+            width: 35px;
+        }
+
+        .menu-btn div {
+            width: 25px;
+            height: 3px;
+            background: #333;
+        }
+
+        .header-title {
+            flex-grow: 1;
+            text-align: center;
+            font-size: 17px;
+            font-weight: 700;
+            color: #000;
+            text-transform: uppercase;
+            line-height: 1.2;
+            padding-right: 35px;
+        }
+
+        /* --- Conteúdo Principal --- */
+        .main-content {
+            width: 100%;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            padding-top: 40px;
+        }
+
+        .page-title {
+            font-size: 22px;
+            font-weight: 700;
+            margin: 0 0 40px 0;
+            color: #212121;
+            text-align: center;
+        }
+
+        /* Grid de Botões (Scan, Texto, Leitor) */
+        .button-grid {
+            width: 92%;
+            display: grid;
+            grid-template-columns: 1fr 1fr 1fr;
+            gap: 6px;
+            /* Espaçamento exato da imagem */
+        }
+
+        .btn-action {
+            height: 65px;
+            background-color: #5cb85c;
+            border: none;
+            border-radius: 2px;
+            /* Cantos levemente mais retos conforme a imagem */
+            color: white;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            cursor: pointer;
+            text-decoration: none;
+        }
+
+        .btn-action:active {
+            background-color: #4cae4c;
+        }
+
+        .btn-action span {
+            font-size: 16px;
+            font-weight: 500;
+        }
+
+        .icon-svg {
+            width: 20px;
+            height: 20px;
+            fill: white;
+        }
+
+        /* Divisor */
+        .divider {
+            width: 100%;
+            height: 1px;
+            background-color: #eeeeee;
+            margin-top: 40px;
+        }
+
+        /* --- Rodapé --- */
+        .footer {
+            margin-top: auto;
+            width: 100%;
+            padding: 40px 0;
+            text-align: center;
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: #666;
+            margin: 4px 0;
+        }
+
+        .footer .demo-tag {
+            text-transform: uppercase;
+            font-weight: 700;
+            color: #555;
+            margin-bottom: 12px;
+            font-size: 14px;
+            letter-spacing: 1px;
+        }
+    </style>
+</head>
+
+<body>
+
+    <div id="overlay" onclick="toggleMenu()"></div>
+
+    <nav id="sidebar">
+        <div class="sidebar-header">Escolha uma opção para continuar</div>
+        <div class="menu-list">
+
+            <a href="painel.html" class="menu-item">
+                <div class="icon-circle bg-blue">
+                    <svg width="20" height="20" viewBox="0 0 24 24">
+                        <rect x="4" y="4" width="16" height="16" rx="3" ry="3" fill="white" />
+                    </svg>
+                </div>
+                Painel
+            </a>
+
+            <a href="consulta_objeto.html" class="menu-item">
+                <div class="icon-circle bg-dark">
+                    <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                </div>
+                Consultar Objeto
+            </a>
+            <a href="consulta_container.html" class="menu-item">
+                <div class="icon-circle bg-dark">
+                    <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                        <path
+                            d="M15.5 14h-.79l-.28-.27A6.471 6.471 0 0 0 16 9.5 6.5 6.5 0 1 0 9.5 16c1.61 0 3.09-.59 4.23-1.57l.27.28v.79l5 4.99L20.49 19l-4.99-5zm-6 0C7.01 14 5 11.99 5 9.5S7.01 5 9.5 5 14 7.01 14 9.5 11.99 14 9.5 14z" />
+                    </svg>
+                </div>
+                Consultar Conteúdo Container
+            </a>
+
+            <a href="solicitacoes.html" class="menu-item">
+                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg></div>Solicitações
+            </a>
+            <a href="#" class="menu-item">
+                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg></div>Arquivar em Container
+            </a>
+            <a href="#" class="menu-item">
+                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg></div>Atribuir Localização
+            </a>
+            <a href="#" class="menu-item">
+                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg></div>Status Gestão Documental
+            </a>
+            <a href="sobre.html" class="menu-item">
+                <div class="icon-circle bg-dark"><svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                        <path d="M3 18h18v-2H3v2zm0-5h18v-2H3v2zm0-7v2h18V6H3z" />
+                    </svg></div>Sobre
+            </a>
+
+            <a href="index.html" class="menu-item">
+                <div class="icon-circle bg-red">
+                    <svg width="22" height="22" fill="white" viewBox="0 0 24 24">
+                        <path
+                            d="M19 6.41L17.59 5 12 10.59 6.41 5 5 6.41 10.59 12 5 17.59 6.41 19 12 13.41 17.59 19 19 17.59 13.41 12z" />
+                    </svg>
+                </div>
+                Sair
+            </a>
+        </div>
+    </nav>
+
+    <header class="header">
+        <div class="menu-btn" onclick="toggleMenu()">
+            <div></div>
+            <div></div>
+            <div></div>
+        </div>
+        <div class="header-title">
+            SOSDOCS - GUARDA, GESTÃO E TECNOLOGIA
+        </div>
+    </header>
+
+    <main class="main-content">
+        <h2 class="page-title">Consulta Conteúdo Container</h2>
+
+        <div class="button-grid">
+            <button class="btn-action">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                        d="M4 4h3l2-2h6l2 2h3a2 2 0 0 1 2 2v12a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2m8 3a5 5 0 0 0-5 5 5 5 0 0 0 5 5 5 5 0 0 0 5-5 5 5 0 0 0-5-5m0 2a3 3 0 0 1 3 3 3 3 0 0 1-3 3 3 3 0 0 1-3-3 3 3 0 0 1 3-3z" />
+                </svg>
+                <span>Scan</span>
+            </button>
+
+            <button class="btn-action">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path
+                        d="M3 17.25V21h3.75L17.81 9.94l-3.75-3.75L3 17.25zM20.71 7.04c.39-.39.39-1.02 0-1.41l-2.34-2.34c-.39-.39-1.02-.39-1.41 0l-1.83 1.83 3.75 3.75 1.83-1.83z" />
+                </svg>
+                <span>Texto</span>
+            </button>
+
+            <button class="btn-action">
+                <svg class="icon-svg" viewBox="0 0 24 24">
+                    <path d="M3 5h2v14H3V5m4 0h1v14H7V5m3 0h2v14h-2V5m4 0h1v14h-1V5m2 0h3v14h-3V5m4 0h1v14h-1V5z" />
+                </svg>
+                <span>Leitor</span>
+            </button>
+        </div>
+
+        <div class="divider"></div>
+
+        <footer class="footer">
+            <div class="demo-tag">{cliente}</div>
+            <p>{e-mail usuário}</p>
+            <p>(c) Copyright {ano}. Todos os Direitos Reservados.</p>
+        </footer>
+    </main>
+
+    <script>
+        function toggleMenu() {
+            const sidebar = document.getElementById('sidebar');
+            const overlay = document.getElementById('overlay');
+            const isActive = sidebar.classList.toggle('active');
+            overlay.style.display = isActive ? 'block' : 'none';
+        }
+    </script>
+
+</body>
+
+</html>
