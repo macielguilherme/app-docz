@@ -8,6 +8,8 @@
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -18,28 +20,37 @@
             display: flex;
             flex-direction: column;
             align-items: center;
-            min-height: 100vh;
+            height: 100vh;
+            overflow: hidden;
+            position: fixed;
+            width: 100%;
         }
 
         /* Logo centralizada conforme imagem */
         .logo {
-            width: 180px;
+            width: 150px;
             height: auto;
-            margin-top: 60px;
-            margin-bottom: 45px;
+            margin-top: 25px;
+            margin-bottom: 15px;
+            flex-shrink: 0;
         }
 
         /* Título da seção */
         h1 {
-            font-size: 22px;
+            font-size: 20px;
             color: #212121;
-            margin-bottom: 35px;
+            margin-bottom: 15px;
             font-weight: 700;
+            flex-shrink: 0;
         }
 
         /* Estrutura da Tabela */
         .table-container {
-            width: 90%;
+            width: 92%;
+            flex: 1;
+            overflow-y: auto;
+            margin-bottom: 10px;
+            border-radius: 4px;
         }
 
         table {
@@ -51,60 +62,144 @@
         th {
             background-color: #f5f5f5;
             color: #333;
-            font-size: 15px;
-            padding: 15px 5px;
+            font-size: 14px;
+            padding: 12px 3px;
             border: 1px solid #e0e0e0;
             font-weight: 700;
+            position: sticky;
+            top: 0;
+            background-color: #f5f5f5;
+            z-index: 10;
         }
 
         td {
             border: 1px solid #e0e0e0;
-            padding: 18px 5px;
+            padding: 14px 3px;
             text-align: center;
-            font-size: 14px;
+            font-size: 13px;
             color: #666;
             vertical-align: middle;
         }
 
         /* Ícone de Check Verde oliva com sombra leve */
         .check-icon {
-            width: 28px;
-            height: 28px;
+            width: 24px;
+            height: 24px;
             fill: #8bc34a;
             filter: drop-shadow(1px 1px 1px rgba(0, 0, 0, 0.15));
         }
 
         /* Botão Azul de navegação */
         .btn-voltar {
-            width: 90%;
-            height: 55px;
+            width: 92%;
+            height: 48px;
             background-color: #4e85ba;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             color: white;
-            font-size: 16px;
+            font-size: 15px;
             font-weight: 500;
             cursor: pointer;
-            margin-top: 40px;
+            margin: 10px 0 15px;
             display: flex;
             align-items: center;
             justify-content: center;
             text-decoration: none;
+            flex-shrink: 0;
+        }
+
+        .btn-voltar:active {
+            background-color: #3d6a96;
         }
 
         /* Rodapé fixo ao fundo */
         .footer {
-            margin-top: auto;
             width: 100%;
-            padding: 30px 0;
+            padding: 12px 0;
             text-align: center;
             border-top: 1px solid #eeeeee;
+            flex-shrink: 0;
+            background-color: white;
         }
 
         .footer p {
-            font-size: 13px;
+            font-size: 12px;
             color: #666;
             margin: 0;
+        }
+
+        /* Ajuste para Galaxy A35 específico */
+        @media (max-width: 420px) and (max-height: 720px) {
+            .logo {
+                width: 130px;
+                margin-top: 15px;
+                margin-bottom: 10px;
+            }
+            
+            h1 {
+                font-size: 18px;
+                margin-bottom: 10px;
+            }
+            
+            th {
+                padding: 10px 2px;
+                font-size: 13px;
+            }
+            
+            td {
+                padding: 12px 2px;
+                font-size: 12px;
+            }
+            
+            .check-icon {
+                width: 22px;
+                height: 22px;
+            }
+            
+            .btn-voltar {
+                height: 44px;
+                font-size: 14px;
+                margin: 8px 0 12px;
+            }
+            
+            .footer {
+                padding: 10px 0;
+            }
+            
+            .footer p {
+                font-size: 11px;
+            }
+        }
+
+        /* Para telas muito pequenas em altura */
+        @media (max-height: 680px) {
+            .logo {
+                width: 120px;
+                margin-top: 10px;
+                margin-bottom: 8px;
+            }
+            
+            h1 {
+                font-size: 17px;
+                margin-bottom: 8px;
+            }
+            
+            th {
+                padding: 8px 2px;
+            }
+            
+            td {
+                padding: 10px 2px;
+            }
+            
+            .btn-voltar {
+                height: 42px;
+                margin: 5px 0 10px;
+            }
+            
+            .footer {
+                padding: 8px 0;
+            }
         }
     </style>
 </head>
@@ -125,6 +220,30 @@
                 </tr>
             </thead>
             <tbody>
+                <tr>
+                    <td>{codigo}</td>
+                    <td>{projeto}</td>
+                    <td>
+                        <a href="opções.html"
+                            style="display: flex; justify-content: center; align-items: center; text-decoration: none;">
+                            <svg class="check-icon" viewBox="0 0 24 24">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
+                <tr>
+                    <td>{codigo}</td>
+                    <td>{projeto}</td>
+                    <td>
+                        <a href="opções.html"
+                            style="display: flex; justify-content: center; align-items: center; text-decoration: none;">
+                            <svg class="check-icon" viewBox="0 0 24 24">
+                                <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
+                            </svg>
+                        </a>
+                    </td>
+                </tr>
                 <tr>
                     <td>{codigo}</td>
                     <td>{projeto}</td>
