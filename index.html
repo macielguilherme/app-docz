@@ -8,6 +8,8 @@
     <style>
         * {
             box-sizing: border-box;
+            margin: 0;
+            padding: 0;
         }
 
         body {
@@ -15,108 +17,182 @@
             padding: 0;
             background-color: #ffffff;
             font-family: 'Roboto', Arial, sans-serif;
-            overflow-x: hidden;
+            height: 100vh;
+            overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
-        /* Layout Mobile (iPhone 14 Pro Max proporcional) */
         .mobile-container {
-            width: 100vw;
-            min-height: 100vh;
+            width: 100%;
+            height: 100%;
             display: flex;
             flex-direction: column;
             align-items: center;
+            justify-content: center;
+            padding: 20px;
             position: relative;
+            max-width: 412px;
+            margin: 0 auto;
         }
 
-        /* Popup de Erro conforme imagem */
         #error-popup {
             display: none;
             position: fixed;
             top: 0;
+            left: 0;
             width: 100%;
-            height: 110px;
             background-color: #b74433;
             color: white;
-            padding: 20px 30px;
+            padding: 15px 20px;
             z-index: 1000;
+            text-align: center;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.2);
+        }
+
+        #error-message {
+            font-size: 16px;
+            margin-top: 4px;
+        }
+
+        .logo {
+            width: 180px;
+            margin-bottom: 20px;
+        }
+
+        .subtitle {
+            font-size: 15px;
+            color: #757575;
+            margin-bottom: 25px;
         }
 
         .form-group {
-            width: 85%;
+            width: 100%;
             border-bottom: 1.5px solid #e0e0e0;
-            padding: 25px 0 10px 0;
+            padding: 15px 0 8px 0;
             display: flex;
             align-items: center;
         }
 
+        .form-group:first-of-type {
+            border-top: 1.5px solid #e0e0e0;
+        }
+
         .icon-container {
-            width: 40px;
-            margin-right: 20px;
+            width: 35px;
             display: flex;
             justify-content: center;
         }
 
         .icon-svg {
-            width: 24px;
-            height: 24px;
+            width: 22px;
+            height: 22px;
             fill: #616161;
         }
 
         input {
             border: none;
             outline: none;
-            font-size: 18px;
+            font-size: 16px;
             color: #212121;
             flex-grow: 1;
             background: transparent;
+            padding: 4px 0;
         }
 
         input::placeholder {
             color: #757575;
         }
 
+        .show-password {
+            width: 100%;
+            padding: 15px 0;
+            display: flex;
+            align-items: center;
+        }
+
+        .show-password svg {
+            width: 20px;
+            height: 20px;
+            fill: #bdbdbd;
+            margin-right: 12px;
+        }
+
+        .show-password span {
+            font-size: 15px;
+            color: #bdbdbd;
+        }
+
         .btn-entrar {
-            width: 85%;
-            height: 60px;
+            width: 100%;
+            height: 52px;
             background-color: #5cb85c;
             border: none;
-            border-radius: 4px;
+            border-radius: 6px;
             color: white;
-            font-size: 20px;
+            font-size: 18px;
             font-weight: 500;
             cursor: pointer;
-            margin-top: 40px;
+            margin: 10px 0 15px 0;
         }
 
         .footer {
-            position: absolute;
-            bottom: 30px;
             width: 100%;
             text-align: center;
             border-top: 1px solid #eeeeee;
-            padding-top: 20px;
+            padding-top: 15px;
+            margin-top: auto;
+        }
+
+        .footer p {
+            font-size: 13px;
+            color: #424242;
+        }
+
+        /* Ajuste específico para telas menores */
+        @media (max-height: 700px) {
+            .logo {
+                width: 150px;
+                margin-bottom: 15px;
+            }
+            
+            .subtitle {
+                margin-bottom: 15px;
+                font-size: 14px;
+            }
+            
+            .form-group {
+                padding: 12px 0 6px 0;
+            }
+            
+            .btn-entrar {
+                height: 48px;
+                margin: 5px 0 10px 0;
+            }
+            
+            .footer {
+                padding-top: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
-
     <div id="error-popup">
-        <div style="font-size: 22px; font-weight: bold;">Problema</div>
-        <div id="error-message" style="font-size: 18px; margin-top: 5px;">Cliente Invalido</div>
+        <div style="font-size: 20px; font-weight: bold;">Problema</div>
+        <div id="error-message">Cliente Invalido</div>
     </div>
 
     <div class="mobile-container">
-        <img src="https://docz.sosdocs.com.br/Docz/app/images/logo.png"
-            style="width: 220px; margin-top: 80px; margin-bottom: 60px;">
+        <img src="https://docz.sosdocs.com.br/Docz/app/images/logo.png" alt="Logo" class="logo">
 
-        <p style="font-size: 17px; color: #757575; margin-bottom: 30px;">SOSDOCS - Guarda, Gestão e Tecnologia</p>
+        <p class="subtitle">SOSDOCS - Guarda, Gestão e Tecnologia</p>
 
-        <div class="form-group" style="border-top: 1.5px solid #e0e0e0;">
+        <div class="form-group">
             <div class="icon-container">
                 <svg class="icon-svg" viewBox="0 0 24 24">
-                    <path
-                        d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" />
+                    <path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/>
                 </svg>
             </div>
             <input type="text" id="usuario" placeholder="Usuario">
@@ -125,8 +201,7 @@
         <div class="form-group">
             <div class="icon-container">
                 <svg class="icon-svg" viewBox="0 0 24 24">
-                    <path
-                        d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z" />
+                    <path d="M18 8h-1V6c0-2.76-2.24-5-5-5S7 3.24 7 6v2H6c-1.1 0-2 .9-2 2v10c0 1.1.9 2 2 2h12c1.1 0 2-.9 2-2V10c0-1.1-.9-2-2-2zm-6 9c-1.1 0-2-.9-2-2s.9-2 2-2 2 .9 2 2-.9 2-2 2zm3.1-9H8.9V6c0-1.71 1.39-3.1 3.1-3.1 1.71 0 3.1 1.39 3.1 3.1v2z"/>
                 </svg>
             </div>
             <input type="password" id="senha" placeholder="........">
@@ -135,25 +210,23 @@
         <div class="form-group">
             <div class="icon-container">
                 <svg class="icon-svg" viewBox="0 0 24 24">
-                    <path
-                        d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8V9h8v10zm-2-8h-4v2h4v-2zm0 4h-4v2h4v-2z" />
+                    <path d="M12 7V3H2v18h20V7H12zM6 19H4v-2h2v2zm0-4H4v-2h2v2zm0-4H4V9h2v2zm0-4H4V5h2v2zm4 12H8v-2h2v2zm0-4H8v-2h2v2zm0-4H8V9h2v2zm0-4H8V5h2v2zm10 12h-8V9h8v10zm-2-8h-4v2h4v-2zm0 4h-4v2h4v-2z"/>
                 </svg>
             </div>
             <input type="text" id="cliente" placeholder="Cliente">
         </div>
 
-        <div style="width: 85%; padding: 25px 0; display: flex; align-items: center;">
-            <svg style="width: 22px; height: 22px; fill: #bdbdbd; margin-right: 15px;" viewBox="0 0 24 24">
-                <path
-                    d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z" />
+        <div class="show-password">
+            <svg viewBox="0 0 24 24">
+                <path d="M12 4.5C7 4.5 2.73 7.61 1 12c1.73 4.39 6 7.5 11 7.5s9.27-3.11 11-7.5c-1.73-4.39-6-7.5-11-7.5zM12 17c-2.76 0-5-2.24-5-5s2.24-5 5-5 5 2.24 5 5-2.24 5-5 5zm0-8c-1.66 0-3 1.34-3 3s1.34 3 3 3 3-1.34 3-3-1.34-3-3-3z"/>
             </svg>
-            <span style="font-size: 16px; color: #bdbdbd;">Mostrar Senha</span>
+            <span>Mostrar Senha</span>
         </div>
 
         <button onclick="verificarLogin()" class="btn-entrar">Entrar</button>
 
         <div class="footer">
-            <p style="font-size: 14px; color: #424242;">(c) Copyright 2025. Todos os Direitos Reservados.</p>
+            <p>(c) Copyright 2025. Todos os Direitos Reservados.</p>
         </div>
     </div>
 
@@ -172,6 +245,7 @@
             else if (u !== 'teste') { mostrar("Usuario Invalido"); }
             else { window.location.href = 'painel.html'; }
         }
+        
         function mostrar(t) {
             document.getElementById('error-message').innerText = t;
             document.getElementById('error-popup').style.display = 'block';
